@@ -20,4 +20,8 @@ echo Build IDS
 cd $DIR/ids
 ./build
 
+echo Build IPS
+cd $DIR/ips
+./build
+
 

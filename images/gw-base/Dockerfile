@@ -57,3 +57,5 @@ COPY etc/snort/rules/local.rules /etc/snort/rules/
 COPY queries.sh /root/
 RUN /root/queries.sh
 
+RUN apt install -y screen
+

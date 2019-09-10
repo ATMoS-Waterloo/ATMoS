@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+import time
+
 from mininet.net import Containernet
 from mininet.node import Controller, RemoteController
 from mininet.cli import CLI
@@ -7,6 +9,8 @@ from mininet.link import TCLink
 from mininet.log import info, setLogLevel
 
 from functools import partial
+
+from vn import install_vns, init_vns
 
 
 setLogLevel('info')
@@ -22,7 +26,7 @@ h1 = net.addDocker('h1', mac='85:85:85:85:85:01', ip='210.0.0.101', dimage="mg-h
 h2 = net.addDocker('h2', ip='210.0.0.102', dimage="mg-host-base")
 
 gw1 = net.addDocker('gw1', ip='210.0.0.200', dimage="mg-ids", pubnet=True)
-gw2 = net.addDocker('gw2', ip='210.0.0.200', dimage="mg-base", pubnet=True)
+gw2 = net.addDocker('gw2', ip='210.0.0.200', dimage="mg-ips", pubnet=True)
 
 info('*** Adding switches\n')
 s1 = net.addSwitch('sw1')
@@ -51,6 +55,10 @@ h1.start()
 h2.start()
 gw1.start()
 gw2.start()
+
+info('*** Initiating virtual nets\n')
+install_vns()
+init_vns()
 
 info('*** Running CLI\n')
 CLI(net)

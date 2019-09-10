@@ -20,7 +20,7 @@ def list_conts(image_name=None):
     ps = [l for l in _bash("docker ps").split("\n") if l][1:]
     if image_name:
         ps = [x for x in ps if image_name in x]
-    res = [re.match(r".*(mn.*).*", l).group(1) for l in ps]
+    res = [x.group(1) for x in [re.match(r".*(mn.*).*", l) for l in ps] if x]
     return res
 
 
@@ -61,9 +61,5 @@ def init_vns(introduce=True):
             _log("gw: " + gwname)
             gw_number = re.match(r".*(\d+).*", gwname).group(1)
             vtn.reassign_vtn(get_mac_of(gwname), "vnet%s" % gw_number, safe=True)
-
-
-install_vns()
-init_vns()
 
 

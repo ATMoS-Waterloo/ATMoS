@@ -1,6 +1,11 @@
-FROM mg-base
+FROM mg-gw-base
 
-ADD https://snort.org/downloads/archive/snort/snort-2.9.9.0.tar.gz /root/
+COPY *.sh /root/
 
-ADD https://www.snort.org/downloads/snort/daq-2.0.6.tar.gz /root/
+# Add DAQ rules
+RUN /root/add-daq-rules.sh
+
+# Configure start-up script
+CMD ["/bin/bash", "/root/entry.sh"]
+
 
