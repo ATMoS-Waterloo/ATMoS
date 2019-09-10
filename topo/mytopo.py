@@ -11,14 +11,14 @@ from functools import partial
 
 setLogLevel('info')
 
-net = Containernet(controller=partial(RemoteController, ip='192.168.56.1', port=6633))
+net = Containernet(controller=partial(RemoteController, ip='172.17.0.1', port=6633))
 
 info('*** Adding controller\n')
 net.addController('c0')
 
 info('*** Adding docker containers using ubuntu:trusty images\n')
 
-h1 = net.addDocker('h1', ip='210.0.0.101', dimage="mg-host-base")
+h1 = net.addDocker('h1', mac='85:85:85:85:85:01', ip='210.0.0.101', dimage="mg-host-base")
 h2 = net.addDocker('h2', ip='210.0.0.102', dimage="mg-host-base")
 
 gw1 = net.addDocker('gw1', ip='210.0.0.200', dimage="mg-ids", pubnet=True)
