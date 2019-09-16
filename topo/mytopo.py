@@ -18,17 +18,21 @@ setLogLevel('info')
 net = Containernet(controller=partial(RemoteController, ip='172.17.0.1', port=6633), autoSetMacs=True)
 
 info('*** Adding controller\n')
+
 net.addController('c0')
 
-info('*** Adding docker containers using ubuntu:trusty images\n')
-
-h1 = net.addDocker('h1', ip='210.0.0.101', dimage="mg-host-base")
-h2 = net.addDocker('h2', ip='210.0.0.102', dimage="mg-host-base")
+info('*** Adding gateways\n')
 
 gw1 = net.addDocker('gw1', ip='210.0.0.200', dimage="mg-ids", pubnet=True)
 gw2 = net.addDocker('gw2', ip='210.0.0.200', dimage="mg-ips", pubnet=True)
 
+info('*** Adding simulations\n')
+
+h1 = net.addDocker('h1', ip='210.0.0.101', dimage="mg-host-base")
+h2 = net.addDocker('h2', ip='210.0.0.102', dimage="mg-host-base")
+
 info('*** Adding switches\n')
+
 s1 = net.addSwitch('sw1')
 s2 = net.addSwitch('sw2')
 

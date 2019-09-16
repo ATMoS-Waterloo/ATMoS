@@ -11,19 +11,21 @@ DIR=$(dirname $0)
 
 cd $DIR
 
+set -e
+
 if [ ! -d halsey-api/.git ]
 then
     echo "halsey-api doesn't exist, cloning."
-    git clone --single-branch --branch mini-gemel https://github.com/simorgh-project/halsey-api.git
-    cd halsey-api
+k   git clone --single-branch --branch mini-gemel https://github.com/simorgh-project/halsey-api.git
 else
     echo "halsey-api exists, pulling."
     cd halsey-api
     git fetch -p
     git checkout mini-gemel
+    git reset --hard # TODO remove if unnecessary
     git pull 
     cd ..
-fi
+fi 
 
 cd halsey-api
 #cp $KEY_PATH conf/key.json

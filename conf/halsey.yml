@@ -2,29 +2,31 @@
 
 port: 8069
 
+container-name: mn.halsey
+
 vnets:
 
   - name: vnet1
     security_level: 1
-    gateway-ip: 10.138.0.4
-    gateway-mac: 9a:74:e3:2d:ec:bd
+    gateway-ip: 172.17.0.3
+    gateway-mac: 00:00:00:00:00:01
 
   - name: vnet2
     security_level: 2
-    gateway-ip: 10.138.0.5
-    gateway-mac: a2:fc:58:21:bf:78
+    gateway-ip: 172.17.0.4
+    gateway-mac: 00:00:00:00:00:02
 
 simulations:
 
   benign:
     - overlay_ip: 210.0.0.101
-      internal_ip: 10.138.0.8
-      mac: 02:84:62:da:44:45
+      internal_ip: 172.17.0.5
+      mac: 00:00:00:00:00:03
 
   malicious:
     - overlay_ip: 210.0.0.102
-      internal_ip: 10.138.0.9
-      mac: 32:8c:19:f5:9b:b0
+      internal_ip: 10.138.0.6
+      mac: 00:00:00:00:00:04
 
 alerts:
   - name: SYN attack
