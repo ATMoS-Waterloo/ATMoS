@@ -24,4 +24,8 @@ echo Build IPS
 cd $DIR/ips
 ./build
 
+echo Build halsey
+cd $DIR/halsey
+./build $DIR/../conf/gcp.json
+
 

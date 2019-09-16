@@ -33,7 +33,7 @@ docker exec -it %s bash -c 'ifconfig $(cat /etc/hostname)-eth0 | grep -oE "HWadd
 
 def send_ping(cname):
     try:
-        _bash(""" docker exec -it {} ping -c1 -W1 210.0.0.1 """.format(cname))
+        _bash(""" docker exec -it {} ping -c1 -W0.1 210.0.0.1 """.format(cname))
     except CalledProcessError as e:
         pass
 
