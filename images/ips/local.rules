@@ -1,0 +1,5 @@
+reject icmp any any -> any any (msg: "IP Packet detected"; sid: 101; rev: 1;)
+reject tcp any any -> any any (flags: S; msg:"Possible TCP SYN Flood"; flow: stateless; threshold: type both, track by_src, count 50, seconds 10; sid:100;rev:1;)
+
+
+

@@ -5,6 +5,8 @@ COPY *.sh /root/
 # Add DAQ rules
 RUN /root/add-daq-rules.sh
 
+COPY local.rules /etc/snort/rules/
+
 # Configure start-up script
 CMD ["/bin/bash", "/root/entry.sh"]
 

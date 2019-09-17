@@ -17,7 +17,7 @@ sysctl -w net.ipv4.ip_forward=1
 iptables -I FORWARD -i $(cat /etc/hostname)-eth0 -o eth1 -j NFQUEUE --queue-num=5
 
 #iptables -A FORWARD -j ACCEPT
-#iptables -t nat -A POSTROUTING -o eth1 -j MASQUERADE
+iptables -t nat -A POSTROUTING -o eth1 -j MASQUERADE
 
 # add eth1 as default gateway
 route add default gw $(ifconfig eth1 | grep -oE "inet addr:([0-9].?)+" | grep -oE "([0-9]+\.)+")1
