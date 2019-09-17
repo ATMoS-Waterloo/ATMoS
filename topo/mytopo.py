@@ -28,7 +28,7 @@ gw2 = net.addDocker('gw2', ip='210.0.0.200', dimage="mg-ips", pubnet=True)
 
 info('*** Adding simulations\n')
 
-h1 = net.addDocker('h1', ip='210.0.0.101', dimage="mg-host-base")
+h1 = net.addDocker('h1', ip='210.0.0.101', dimage="mg-benign-googler")
 h2 = net.addDocker('h2', ip='210.0.0.102', dimage="mg-host-base")
 
 info('*** Adding switches\n')

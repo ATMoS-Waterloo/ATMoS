@@ -1,0 +1,31 @@
+#!/bin/bash
+
+DIR=$(dirname $0)
+
+cd $DIR
+
+set -e
+
+if [ ! -d "puppet-master/.git" ]
+then 
+    echo "puppet-master does not exist, cloning"
+    git clone --single-branch --branch mini-gemel git@github.com:simorgh-project/puppet-master.git
+else
+    echo "puppet-master exists, pulling updates"
+    cd puppet-master
+    git reset --hard
+    git pull
+    cd ..
+fi
+
+cd puppet-master
+
+./build.sh
+
+cd ..
+
+docker build -t mg-benign-googler .
+
+
+
+
