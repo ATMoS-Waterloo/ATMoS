@@ -28,6 +28,10 @@ echo Build Googler
 cd $DIR/benign-googler
 ./build
 
+echo Build SYN attacker
+cd $DIR/malish-syn
+./build
+
 echo Build halsey
 cd $DIR/halsey
 ./build $DIR/../conf/gcp.json

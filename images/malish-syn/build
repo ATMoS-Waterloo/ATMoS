@@ -1,0 +1,30 @@
+#!/bin/bash
+
+DIR=$(dirname $0)
+
+cd $DIR
+
+set -e
+
+REPO_NAME="ez-SYN-TCP-FLOOD"
+REPO_URL="https://github.com/simorgh-project/ez-SYN-TCP-FLOOD.git"
+
+if [ ! -d "$REPO_NAME/.git" ]
+then 
+    echo "$REPO_NAME does not exist, cloning"
+    git clone --single-branch --branch mini-gemel $REPO_URL
+else
+    echo "$REPO_NAME exists, pulling updates"
+    cd $REPO_NAME
+    git reset --hard
+    git checkout mini-gemel
+    git pull
+    cd ..
+fi
+
+cd $REPO_NAME
+./build.sh
+cd ..
+
+docker build -t mg-malish-syn .
+
