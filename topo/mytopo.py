@@ -23,13 +23,13 @@ net.addController('c0')
 
 info('*** Adding gateways\n')
 
-gw1 = net.addDocker('gw1', ip='210.0.0.200', dimage="mg-ids", pubnet=True)
-gw2 = net.addDocker('gw2', ip='210.0.0.200', dimage="mg-ips", pubnet=True)
+gw1 = net.addDocker('gw1', ip='210.0.0.200', mac="00:00:00:00:00:01", dimage="mg-ids", pubnet=True)
+gw2 = net.addDocker('gw2', ip='210.0.0.200', mac="00:00:00:00:00:02", dimage="mg-ips", pubnet=True)
 
 info('*** Adding simulations\n')
 
-h1 = net.addDocker('h1', ip='210.0.0.101', dimage="mg-benign-googler")
-h2 = net.addDocker('h2', ip='210.0.0.102', dimage="mg-host-base")
+h1 = net.addDocker('h1', ip='210.0.0.101', mac="00:00:00:00:00:03", dimage="mg-benign-googler")
+h2 = net.addDocker('h2', ip='210.0.0.102', mac="00:00:00:00:00:04", dimage="mg-host-base")
 
 info('*** Adding switches\n')
 
