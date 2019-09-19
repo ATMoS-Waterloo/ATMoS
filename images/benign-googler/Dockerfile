@@ -1,6 +1,6 @@
 FROM  iman/puppet-master:1 
 
-COPY entry.sh /usr/src/app/
+COPY *.sh /usr/src/app/
 
 USER root
 
