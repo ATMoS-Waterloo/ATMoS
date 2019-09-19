@@ -9,7 +9,7 @@ set -e
 if [ ! -d "puppet-master/.git" ]
 then 
     echo "puppet-master does not exist, cloning"
-    git clone --single-branch --branch mini-gemel git@github.com:simorgh-project/puppet-master.git
+    git clone --single-branch --branch mini-gemel https://github.com/simorgh-project/puppet-master.git
 else
     echo "puppet-master exists, pulling updates"
     cd puppet-master

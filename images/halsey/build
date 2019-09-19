@@ -16,7 +16,7 @@ set -e
 if [ ! -d halsey-api/.git ]
 then
     echo "halsey-api doesn't exist, cloning."
-k   git clone --single-branch --branch mini-gemel https://github.com/simorgh-project/halsey-api.git
+    git clone --single-branch --branch mini-gemel https://github.com/simorgh-project/halsey-api.git
 else
     echo "halsey-api exists, pulling."
     cd halsey-api
