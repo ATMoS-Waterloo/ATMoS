@@ -1,4 +1,4 @@
-reject icmp any any -> any any (msg: "IP Packet detected"; sid: 101; rev: 1;)
+alert icmp any any -> any any (msg: "IP Packet detected"; sid: 101; rev: 1;)
 
 alert tcp any any -> any any (flags: S; msg:"Possible TCP SYN Flood"; flow: stateless;  sid:100;rev:1;)
 
