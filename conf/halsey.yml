@@ -24,7 +24,7 @@ simulations:
       mac: 00:00:00:00:00:03
 
   malicious:
-    - overlay_ip: 210.0.0.102
+    - overlay_ip: 210.0.0.106
       internal_ip: 172.17.0.6
       mac: 00:00:00:00:00:04
 
