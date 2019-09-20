@@ -32,6 +32,10 @@ echo Build SYN attacker
 cd $DIR/malish-syn
 ./build
 
+echo Build APT attacker
+cd $DIR/malish-apt
+./build
+
 echo Build halsey
 cd $DIR/halsey
 ./build $DIR/../conf/gcp.json

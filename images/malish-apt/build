@@ -1,0 +1,22 @@
+#!/bin/bash
+
+DIR=$(dirname $0)
+
+set -e
+
+cd $DIR
+
+if [ ! -d infection-gemel/.git ]
+then
+    echo "Directory doesn't exists, cloning"
+    git clone https://github.com/simorgh-project/infection-gemel.git
+else
+    echo "Directory exists, updating"
+    cd infection-gemel
+    git reset --hard
+    git pull
+    cd ..
+fi
+
+docker build -t mg-malish-apt .
+

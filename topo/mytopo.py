@@ -29,7 +29,7 @@ gw2 = net.addDocker('gw2', ip='210.0.0.200', mac="00:00:00:00:00:02", dimage="mg
 info('*** Adding simulations\n')
 
 h1 = net.addDocker('h1', ip='210.0.0.101', mac="00:00:00:00:00:03", dimage="mg-benign-googler")
-h2 = net.addDocker('h2', ip='210.0.0.102', mac="00:00:00:00:00:04", dimage="mg-malish-syn")
+h2 = net.addDocker('h2', ip='210.0.0.106', mac="00:00:00:00:00:04", dimage="mg-malish-apt")
 
 info('*** Adding switches\n')
 
