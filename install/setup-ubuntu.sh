@@ -36,8 +36,20 @@ echo "export PYTHONPATH=\"\$PYTHONPATH:$(realpath $BASE_DIR)/gemelnet\"" >> ~/.b
 git clone https://github.com/simorgh-project/bella-agent.git
 
 # add fake URLs
-echo "127.0.0.1	odl.einstein.eeman.me" >> /etc/hosts
-echo "127.0.0.1	halsey.einstein.eeman.me" >> /etc/hosts
+# echo "127.0.0.1	odl.einstein.eeman.me" >> /etc/hosts
+# echo "127.0.0.1	halsey.einstein.eeman.me" >> /etc/hosts
+
+sudo add-apt-repository ppa:jonathonf/python-3.6
+apt update
+apt-get install -y python3.6 python-pip
+virtualenv -p /usr/bin/python3.6 jupenv
+. jupenv/bin/activate
+pip install tensorflow jupyter
+
+/usr/local/vtn/bin/vtn_stop
+/usr/local/vtn/bin/vtn_start
+/usr/local/vtn/sbin/unc_dmctl status
+
 
 
 

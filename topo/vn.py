@@ -4,7 +4,7 @@ from subprocess import check_output, CalledProcessError
 from gemel.vnet import vtn
 
 
-HOST_IMAGES = ["mg-host-base"]
+HOST_IMAGES = ["mg-host-base", "mg-benign-googler", "mg-malish-apt"]
 GW_IMAGES = ["mg-ids", "mg-ips"]
 
 
@@ -52,13 +52,14 @@ def init_vns(introduce=True):
 
     _log("adding hosts to vnet1")
     for himage in HOST_IMAGES:
+        _log("adding host: " + himage)
         for hname in list_conts(himage):
             vtn.reassign_vtn(get_mac_of(hname), "vnet1", safe=True)
 
     _log("adding gatewys to their vnet")
     for gwimage in GW_IMAGES:
         for gwname in list_conts(gwimage):
-            _log("gw: " + gwname)
+            _log("adding gw: " + gwname)
             gw_number = re.match(r".*(\d+).*", gwname).group(1)
             vtn.reassign_vtn(get_mac_of(gwname), "vnet%s" % gw_number, safe=True)
 

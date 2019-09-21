@@ -32,5 +32,5 @@ cd halsey-api
 ./build.sh
 cd ..
 
-
+docker build -t mg-halsey .
 
