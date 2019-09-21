@@ -35,7 +35,7 @@ h2 = net.addDocker('h2', ip='210.0.0.102', mac="00:00:00:00:00:04", dimage="mg-b
 # h4 = net.addDocker('h4', ip='210.0.0.104', mac="00:00:00:00:00:06", dimage="mg-benign-googler")
 
 info('*** Adding simulations (malicious)\n')
-m1 = net.addDocker('m1', ip='210.0.0.110', mac="00:00:00:00:00:10", dimage="mg-malish-apt")
+m1 = net.addDocker('m1', ip='210.0.0.110', mac="00:00:00:00:00:10", dimage="mg-malish-syn")
 # m2 = net.addDocker('m2', ip='210.0.0.111', mac="00:00:00:00:00:11", dimage="mg-malish-apt")
 
 info('*** Adding switches\n')
