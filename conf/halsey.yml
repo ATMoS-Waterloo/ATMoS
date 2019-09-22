@@ -35,14 +35,26 @@ simulations:
       internal_ip: 172.17.0.8
       mac: 00:00:00:00:00:06
 
+    - overlay_ip: 210.0.0.105
+      internal_ip: 172.17.0.9
+      mac: 00:00:00:00:00:07
+
   malicious:
     - overlay_ip: 210.0.0.110
-      internal_ip: 172.17.0.9
+      internal_ip: 172.17.0.10
       mac: 00:00:00:00:00:10
 
     - overlay_ip: 210.0.0.111
-      internal_ip: 172.17.0.10
+      internal_ip: 172.17.0.11
       mac: 00:00:00:00:00:11
+
+    - overlay_ip: 210.0.0.112
+      internal_ip: 172.17.0.12
+      mac: 00:00:00:00:00:12
+
+    - overlay_ip: 210.0.0.113
+      internal_ip: 172.17.0.13
+      mac: 00:00:00:00:00:13
 
 alerts:
   - name: SYN attack
