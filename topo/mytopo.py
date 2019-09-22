@@ -31,12 +31,12 @@ info('*** Adding simulations (benign)\n')
 
 h1 = net.addDocker('h1', ip='210.0.0.101', mac="00:00:00:00:00:03", dimage="mg-benign-googler")
 h2 = net.addDocker('h2', ip='210.0.0.102', mac="00:00:00:00:00:04", dimage="mg-benign-googler")
-# h3 = net.addDocker('h3', ip='210.0.0.103', mac="00:00:00:00:00:05", dimage="mg-benign-googler")
-# h4 = net.addDocker('h4', ip='210.0.0.104', mac="00:00:00:00:00:06", dimage="mg-benign-googler")
+h3 = net.addDocker('h3', ip='210.0.0.103', mac="00:00:00:00:00:05", dimage="mg-benign-googler")
+h4 = net.addDocker('h4', ip='210.0.0.104', mac="00:00:00:00:00:06", dimage="mg-benign-googler")
 
 info('*** Adding simulations (malicious)\n')
 m1 = net.addDocker('m1', ip='210.0.0.110', mac="00:00:00:00:00:10", dimage="mg-malish-syn")
-# m2 = net.addDocker('m2', ip='210.0.0.111', mac="00:00:00:00:00:11", dimage="mg-malish-apt")
+m2 = net.addDocker('m2', ip='210.0.0.111', mac="00:00:00:00:00:11", dimage="mg-malish-syn")
 
 info('*** Adding switches\n')
 
@@ -45,10 +45,10 @@ s2 = net.addSwitch('sw2')
 
 info('*** Creating links\n')
 
-# s1_hosts = (h1, h3, m1, gw1)
-s1_hosts = (h1, m1, gw1)
-# s2_hosts = (h2, h4, m2, gw2)
-s2_hosts = (h2, gw2)
+s1_hosts = (h1, h3, m1, gw1)
+# s1_hosts = (h1, m1, gw1)
+s2_hosts = (h2, h4, m2, gw2)
+# s2_hosts = (h2, gw2)
 
 for x in s1_hosts:
     net.addLink(x, s1)
