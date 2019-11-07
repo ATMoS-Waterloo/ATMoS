@@ -3,32 +3,12 @@
 KEY_PATH="$1"
 DIR=$(dirname $0)
 
-# if [ -z "$KEY_PATH" ]||[ ! -f "$KEY_PATH" ]
-# then
-#     echo "Key file not passed"
-#     exit 1
-# fi
 
 cd $DIR
 
 set -e
 
-if [ ! -d halsey-api/.git ]
-then
-    echo "halsey-api doesn't exist, cloning."
-    git clone --single-branch --branch mini-gemel https://github.com/simorgh-project/halsey-api.git
-else
-    echo "halsey-api exists, pulling."
-    cd halsey-api
-    git fetch -p
-    git checkout mini-gemel
-    git reset --hard # TODO remove if unnecessary
-    git pull 
-    cd ..
-fi 
-
 cd halsey-api
-#cp $KEY_PATH conf/key.json
 ./build.sh
 cd ..
 
