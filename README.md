@@ -94,5 +94,5 @@ The hosts are designed in `images` as Docker containers. The topology in `topo` 
 
 # Publication
 
-Our conference paper is accepted to be published in NOMS 2020 : IEEE/IFIP Network Operations and Management Symposium.
+Our [conference paper](http://rboutaba.cs.uwaterloo.ca/Papers/Conferences/2020/AkbariNOMS20.pdf) is accepted to be published in NOMS 2020 : IEEE/IFIP Network Operations and Management Symposium.
 
