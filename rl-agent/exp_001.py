@@ -2,16 +2,16 @@
 # coding: utf-8
 
 # # Experiment 1
-# 
-# 
-# **Overview**: 
-# 
+#
+#
+# **Overview**:
+#
 # Two virtual networks, one with IDS one with IPS. Hosts running a Google Search for benign and a SYN attack for malicious.
-# 
+#
 # **Actions**: toggle VN
-# 
+#
 # **State**: where (which VN) each host is + last N IDS alerts for each host
-# 
+#
 # **Reward**: XNOR of current VN state and desired state (dumb)
 
 # In[1]:
@@ -68,7 +68,7 @@ def printProgressBar (iteration, total, prefix = '', suffix = '', decimals = 1, 
     # Print New Line on Complete
     if iteration == total:
         print()
-    
+
 
 
 # ## DQN Agent
@@ -77,26 +77,26 @@ def printProgressBar (iteration, total, prefix = '', suffix = '', decimals = 1, 
 
 
 class DQNAgent:
-    
+
     class StateModel(enum.Enum):
         VN_ONLY = 1
         IDS = 2
 
-    def __init__(self, env, max_eps, period=10, 
-                 state_mode=StateModel.IDS, model=None, 
+    def __init__(self, env, max_eps, period=10,
+                 state_mode=StateModel.IDS, model=None,
                  gamma=GAMMA, max_epsilon=EPSILON,
                  epsilon_decay=EXPLORATION_DECAY):
-        
+
         self.env = env
         self.max_episodes = max_eps
         self.epsilon = max_epsilon
         self.max_epsilon = max_epsilon
         self.epsilon_dacay = epsilon_decay
-        self.period = period   
+        self.period = period
         self.state_mode = state_mode
         self.gamma = gamma
         self.model = model or self._create_model()
-        
+
 
     def _create_model(self):
         """
@@ -116,7 +116,7 @@ class DQNAgent:
         model.compile(loss="mse", optimizer=Adam(lr=0.001))
         model.summary()
         return model
-    
+
     def _to_feature_vector(self, state):
         if self.state_mode == DQNAgent.StateModel.VN_ONLY:
             return state[0]
@@ -128,7 +128,7 @@ class DQNAgent:
     def train(self):
 
         histories = []
-        
+
         # train for max_eps episodes
         for episode in range(1, self.max_episodes + 1):
 
@@ -136,30 +136,30 @@ class DQNAgent:
 
             # start at random position
             _, terminal, step = self.env.reset(), False, 0
-            
+
             time.sleep(self.period)
-            
+
             state = self.env.state()
-                              
+
             # flatten state
             state = self._to_feature_vector(state)
-            
+
             history = []
 
             # iterate step-by-step
             while not terminal:
-                
+
                 step += 1
-                
+
                 # pick action based on policy
                 action, is_random = self.policy(state)
-                
+
                 print()
                 print(f"Taking action {action}")
 
                 # run action and get reward
                 state_next_raw, reward, terminal = self.env.step(action)
-                
+
                 # instead of using the immediate next state, wait for it to simmer
                 if self.period > 0:
                     time.sleep(self.period)
@@ -167,7 +167,7 @@ class DQNAgent:
 
                 # flatten state
                 state_next = self._to_feature_vector(state_next_raw)
-                
+
                 print()
                 print(f"Step {step} reward={reward} new_state={state_next_raw}")
 
@@ -175,10 +175,10 @@ class DQNAgent:
                 # # where a terminal state means "losing"
                 # if terminal:
                 #    reward *= -1
-                
+
                 preds = self.model.predict([[state_next]])
                 next_scores_prediction = preds[0]
-                
+
                 print(f"Predicted scores for each action in next step: {next_scores_prediction}")
 
                 # compute target Q
@@ -191,7 +191,7 @@ class DQNAgent:
 
                 # update current state
                 state = state_next
-                
+
                 # update history
                 history.append({
                     "time": step,
@@ -203,7 +203,7 @@ class DQNAgent:
                 })
 
             histories.append(history)
-            
+
             # apply exploration decay
             self.epsilon *= self.epsilon_dacay
             print(f"Epsilon reduced to {self.epsilon}")
@@ -259,11 +259,11 @@ def create_model_1(env):
 
 # # Running DQN
 
-# ## Experiment 001 
-# 
+# ## Experiment 001
+#
 # State: just where each host is
 # Model: 3 dense layers
-# 
+#
 # ![zena](https://i.imgflip.com/2fw0fb.jpg)
 
 # In[4]:
@@ -318,8 +318,8 @@ hist
 
 # ## Experiment 003
 
-# Is it about not having enough time? Let's find out. 
-# 
+# Is it about not having enough time? Let's find out.
+#
 # Forget about IDS feedback. instaed of letting it soak we would just get the fake reward and let it continue.
 
 # In[33]:
@@ -411,7 +411,7 @@ plt.plot([x['reward'] for x in hist[0]])
 
 
 # ## Experiment 006
-# 
+#
 # EXP-005 + Batch Normalization
 
 # In[58]:
@@ -540,7 +540,7 @@ plt.plot([x['reward'] for x in hist[0]])
 
 
 # It seems like the single layer model does not have the capacity to learn toggles easily. it's always toggling between two states for solving such a simplistic set-up.
-# 
+#
 # Also, the "toggling" scheme seemed at first like a clever trick to contorl the action-space but it's wasting a lot of training time to be learned.
 
 # ## Experiment 010
@@ -553,19 +553,19 @@ def create_model_10(env):
     # model.add(BatchNormalization(input_shape=(len(env._hosts_sorted_by_id),)))
 
     model.add(Dense(
-        4, 
+        4,
         activation="relu",
         input_shape=(len(env._hosts_sorted_by_id),)
     ))
-    
+
     model.add(Dense(
         env.action_space.n,
         activation="linear",
     ))
-    
+
     model.compile(loss="mse", optimizer=Adam(lr=0.01))
     model.summary()
-    
+
     return model
 
 
@@ -638,20 +638,20 @@ def create_model_11(env):
     # model.add(BatchNormalization(input_shape=(len(env._hosts_sorted_by_id),)))
 
     model.add(Dense(
-        4, 
+        4,
         activation="relu",
         input_shape=(len(env._hosts_sorted_by_id),)
     ))
-    
+
     model.add(Dense(4, activation="relu"))
-    
+
     model.add(Dense(
         env.action_space.n,
         activation="linear",
     ))
         model.compile(loss="mse", optimizer=Adam(lr=0.01))
     model.summary()
-    
+
     return model
 
 
@@ -692,12 +692,12 @@ for xc in ticks:
 plt.plot([x['reward'] for x in hist[0]])
 
 
-# Congrats! the model has learned the concept of "toggles". 
-# 
+# Congrats! the model has learned the concept of "toggles".
+#
 # ### Why Toggles?
-# 
+#
 # A good approach would just have a more-security and a less-security button for each host, this is more in line with the multi (>2) VN approach and it wouldn't burden the model unnecessarily.
-# 
+#
 # Let's let the model run for a few more epochs at finer grain steps.
 
 # In[40]:
@@ -730,7 +730,7 @@ def create_model_12(env):
     model.add(Dense(4, activation="relu"))
     model.add(Dense(env.action_space.n, activation="linear"))
     model.compile(loss="mse", optimizer=Adam(lr=0.01))
-    model.summary()    
+    model.summary()
     return model
 
 
@@ -805,7 +805,7 @@ def create_model_13(env):
     # model.add(Dense(4, activation="relu"))
     model.add(Dense(env.action_space.n, activation="linear"))
     model.compile(loss="mse", optimizer=Adam(lr=0.01))
-    model.summary()    
+    model.summary()
     return model
 
 
@@ -890,15 +890,7 @@ hist = agent.train()
 
 # In[24]:
 
-
-display(HTML("""<img width="300px" src="https://i.pinimg.com/originals/04/fa/41/04fa41ddc000ba75de7bce263b8ac469.jpg" />"""))
-
-time.sleep(7)
-
-# clear_output()
-
 print("Done.")
-
 
 # In[ ]:
 
