@@ -103,12 +103,12 @@
   # Fix m2 for VTN
   - name: make m2 dir
     file:
-      path: /root/.m2
+      path: ~/.m2
       state: directory
 
   - name: fix m2 settings
-    shell: "cp -n /root/.m2/settings.xml{,.orig} ; \
-wget -q -O - https://raw.githubusercontent.com/opendaylight/odlparent/master/settings.xml > /root/.m2/settings.xml"
+    shell: "cp -n ~/.m2/settings.xml{,.orig} ; \
+wget -q -O - https://raw.githubusercontent.com/opendaylight/odlparent/master/settings.xml > ~/.m2/settings.xml"
 
 
   - name: checkout
