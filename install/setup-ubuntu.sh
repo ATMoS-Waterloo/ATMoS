@@ -11,14 +11,6 @@ cd $BASE_DIR
 apt install -y openjdk-8-jdk
 apt install -y git
 
-# install Python 3.7
-add-apt-repository ppa:deadsnakes/ppa
-apt update
-apt install -y python3.7 python3.7-gdbm
-# update-alternatives --install /usr/bin/python python /usr/bin/python3.7 2
-# update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.7 2
-apt install -y python3-pip
-
 # install ODL
 apt-add-repository --yes --update ppa:ansible/ansible
 apt update
@@ -35,6 +27,14 @@ cd ../..
 # add gemel-sdn to python path
 echo "export PYTHONPATH=\"\$PYTHONPATH:$(realpath $DIR/../lib)\"" >> ~/.bashrc
 echo "export PYTHONPATH=\"\$PYTHONPATH:$(realpath $BASE_DIR)/gemelnet\"" >> ~/.bashrc
+
+# install Python 3.7
+add-apt-repository ppa:deadsnakes/ppa
+apt update
+apt install -y python3.7 python3.7-gdbm
+# update-alternatives --install /usr/bin/python python /usr/bin/python3.7 2
+# update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.7 2
+apt install -y python3-pip
 
 # install environment for Jupyter and Machine Learning
 pip3 install virtualenv
