@@ -25,8 +25,8 @@ apt update
 apt install -y ansible
 ansible-playbook $DIR/odl.yml
 
-# install gemel-net
-git clone https://github.com/ATMoS-Waterloo/gemelnet
+# install gemel-net (from abagarre repo)
+git clone https://github.com/abagarre/gemelnet
 ln -s gemelnet containernet
 cd gemelnet/ansible
 ansible-playbook -i "localhost," -c local install.yml
