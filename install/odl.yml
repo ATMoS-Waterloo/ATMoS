@@ -107,8 +107,8 @@
       state: directory
 
   - name: fix m2 settings
-    shell: "cp -n ~/.m2/settings.xml{,.orig} ; \
-wget -q -O - https://raw.githubusercontent.com/opendaylight/odlparent/master/settings.xml > ~/.m2/settings.xml"
+    shell: "cp -n /root/.m2/settings.xml{,.orig} ; \
+wget -q -O - https://raw.githubusercontent.com/opendaylight/odlparent/master/settings.xml > /root/.m2/settings.xml"
 
 
   - name: checkout
