@@ -8,18 +8,26 @@ BASE_DIR=/root
 
 cd $BASE_DIR
 
-apt install -y openjdk-8-java
+apt install -y openjdk-8-jdk
 apt install -y git
 
+# install Python 3.7
+add-apt-repository ppa:deadsnakes/ppa
+apt update
+apt install -y python3.7 python3.7-gdbm
+# update-alternatives --install /usr/bin/python python /usr/bin/python3.7 2
+# update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.7 2
+apt install -y python3-pip
+
 # install ODL
-apt-add-repository ppa:ansible/ansible -y
-apt-get update
-apt-get install -y ansible
+apt-add-repository --yes --update ppa:ansible/ansible
+apt update
+apt install -y ansible
 ansible-playbook $DIR/odl.yml
 
 # install gemel-net
 git clone https://github.com/ATMoS-Waterloo/gemelnet
-ln -s containernet gemelnet
+ln -s gemelnet containernet
 cd gemelnet/ansible
 ansible-playbook -i "localhost," -c local install.yml
 cd ../..
@@ -28,18 +36,16 @@ cd ../..
 echo "export PYTHONPATH=\"\$PYTHONPATH:$(realpath $DIR/../lib)\"" >> ~/.bashrc
 echo "export PYTHONPATH=\"\$PYTHONPATH:$(realpath $BASE_DIR)/gemelnet\"" >> ~/.bashrc
 
-# install Python 3.6 and environment for Jupyter and Machine Learning
-sudo add-apt-repository ppa:jonathonf/python-3.6
-apt update
-apt-get install -y python3.6 python-pip
-virtualenv -p /usr/bin/python3.6 jupenv
+# install environment for Jupyter and Machine Learning
+pip3 install virtualenv
+virtualenv -p /usr/bin/python3.7 jupenv
 . jupenv/bin/activate
-pip install tensorflow jupyter
+pip3 install tensorflow jupyter
 
 # start ODL
 /usr/local/vtn/bin/vtn_stop
 /usr/local/vtn/bin/vtn_start
-/usr/local/vtn/sbin/unc_dmctl status
+/usr/local/vtn/bin/unc_dmctl status
 
 
 
