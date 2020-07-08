@@ -17,6 +17,12 @@ apt update
 apt install -y ansible
 ansible-playbook $DIR/odl.yml
 
+# install Python 3.7
+add-apt-repository ppa:deadsnakes/ppa
+apt update
+apt install -y python3.7
+update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.7 2
+
 # install gemel-net (from abagarre repo)
 git clone https://github.com/abagarre/gemelnet
 ln -s gemelnet containernet
@@ -27,14 +33,6 @@ cd ../..
 # add gemel-sdn to python path
 echo "export PYTHONPATH=\"\$PYTHONPATH:$(realpath $DIR/../lib)\"" >> ~/.bashrc
 echo "export PYTHONPATH=\"\$PYTHONPATH:$(realpath $BASE_DIR)/gemelnet\"" >> ~/.bashrc
-
-# install Python 3.7
-add-apt-repository ppa:deadsnakes/ppa
-apt update
-apt install -y python3.7 python3.7-gdbm
-# update-alternatives --install /usr/bin/python python /usr/bin/python3.7 2
-# update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.7 2
-apt install -y python3-pip
 
 # install environment for Jupyter and Machine Learning
 pip3 install virtualenv
