@@ -19,7 +19,7 @@ halsey_id=$($DIR/../images/halsey/halsey-api/run.sh daemon)
 
 # Run mininet and launch simulations
 echo -e "\nRunning mininet"
-python3 $DIR/mytopo.py
+env PYTHONPATH="$PYTHONPATH:$(realpath $DIR/../lib)" python3 $DIR/mytopo.py
 
 docker kill $halsey_id
 
