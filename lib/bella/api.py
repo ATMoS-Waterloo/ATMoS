@@ -15,7 +15,7 @@ class ApiWrapper(object):
     SIMULATIONS_LIST = HALSEY_BASE_URL + "/v1/topo/sims"
     ALERTS_INFO = HALSEY_BASE_URL + "/v1/info/alerts"
 
-    VNETS_TOGGLE = HALSEY_BASE_URL + "/vnet/toggle"
+    VNETS_TOGGLE = HALSEY_BASE_URL + "/v1/vnet/toggle"
     VNETS_STATUS = HALSEY_BASE_URL + "/v1/vnet/status"
     VNETS_SET = HALSEY_BASE_URL + "/v1/vnet/set"
     VNETS_LIST = HALSEY_BASE_URL + "/v1/vnet/list"
