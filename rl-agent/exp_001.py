@@ -247,7 +247,7 @@ def create_model_1(env):
     model.add(Dense(
         5,
         # input_shape=,
-        input_shape=(2,),
+        input_shape=(9,),
         activation="relu"
     ))
     model.add(Dense(20, activation="relu"))
