@@ -247,7 +247,7 @@ def create_model_1(env):
     model.add(Dense(
         5,
         # input_shape=,
-        input_shape=(9,),
+        input_shape=(len(env._hosts_sorted_by_id),),
         activation="relu"
     ))
     model.add(Dense(20, activation="relu"))
@@ -362,7 +362,7 @@ def create_model_4(env):
 env = GemelEnv(interval=10, max_steps=500)
 env.reset()
 
-agent = DQNAgent(env, max_eps=1, period=0, state_mode=DQNAgent.StateModel.VN_ONLY, model=create_model_3(env))
+agent = DQNAgent(env, max_eps=1, period=0, state_mode=DQNAgent.StateModel.VN_ONLY, model=create_model_4(env))
 hist = agent.train()
 
 hist
@@ -398,7 +398,7 @@ def create_model_5(env):
 env = GemelEnv(interval=10, max_steps=500)
 env.reset()
 
-agent = DQNAgent(env, max_eps=1, period=0, state_mode=DQNAgent.StateModel.VN_ONLY, model=create_model_4(env))
+agent = DQNAgent(env, max_eps=1, period=0, state_mode=DQNAgent.StateModel.VN_ONLY, model=create_model_5(env))
 hist = agent.train()
 
 hist
