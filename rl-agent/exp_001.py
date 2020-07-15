@@ -649,7 +649,7 @@ def create_model_11(env):
         env.action_space.n,
         activation="linear",
     ))
-        model.compile(loss="mse", optimizer=Adam(lr=0.01))
+    model.compile(loss="mse", optimizer=Adam(lr=0.01))
     model.summary()
 
     return model
