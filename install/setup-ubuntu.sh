@@ -17,18 +17,38 @@ apt update
 apt install -y ansible
 ansible-playbook $DIR/odl.yml
 
+# install gemel-net (from abagarre repo)
+git clone https://github.com/abagarre/gemelnet
+ln -s gemelnet containernet
+ansible-playbook -i "localhost," -c local gemelnet/ansible/install.yml
+sh containernet/util/install.sh
+# If there is an OVS-testcontroller error:
+#service openvswitch-testcontroller stop
+#update-rc.d openvswitch-testcontroller disable
+#sh containernet/util/install.sh
+cd containernet
+make develop
+cd ..
+
 # install Python 3.7
 add-apt-repository ppa:deadsnakes/ppa
 apt update
 apt install -y python3.7
-update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.7 2
+update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.7 1
 
-# install gemel-net (from abagarre repo)
-git clone https://github.com/abagarre/gemelnet
-ln -s gemelnet containernet
-cd gemelnet/ansible
-ansible-playbook -i "localhost," -c local install.yml
-cd ../..
+# Make sure `pip3 -V` correspond to python 3.7
+pip3 install python-backports.ssl-match-hostname pytest==4.6.4 docker==2.0.2 python-iptables
+
+# Fix pexpect error
+apt remove python3-pexpect
+pip3 install pexpect
+pip3 install --upgrade --force-reinstall setuptools
+
+# Run again containernet install
+sh containernet/util/install.sh
+cd containernet
+make develop
+cd ..
 
 # add gemel-sdn to python path
 echo "export PYTHONPATH=\"\$PYTHONPATH:$(realpath $DIR/../lib)\"" >> ~/.bashrc
@@ -44,8 +64,4 @@ pip3 install tensorflow jupyter
 /usr/local/vtn/bin/vtn_stop
 /usr/local/vtn/bin/vtn_start
 /usr/local/vtn/bin/unc_dmctl status
-
-
-
-
 
