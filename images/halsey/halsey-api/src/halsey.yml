@@ -1,30 +1,102 @@
 ---
 
-port: 8069
+port: 8070
+
+container-name: mn.halsey
 
 vnets:
 
   - name: vnet1
     security_level: 1
-    gateway-ip: 10.138.0.4
-    gateway-mac: 9a:74:e3:2d:ec:bd
+    gateway-ip: 172.17.0.3
+    gateway-mac: 00:00:00:00:00:01
 
   - name: vnet2
     security_level: 2
-    gateway-ip: 10.138.0.5
-    gateway-mac: a2:fc:58:21:bf:78
+    gateway-ip: 172.17.0.4
+    gateway-mac: 00:00:00:00:00:02
+
+#  - name: vnet3
+#    security_level: 3
+#    gateway-ip: 172.17.0.5
+#    gateway-mac: 00:00:00:00:00:03
+
 
 simulations:
 
   benign:
     - overlay_ip: 210.0.0.101
-      internal_ip: 10.138.0.8
-      mac: 02:84:62:da:44:45
+      internal_ip: 172.17.0.25
+      mac: 00:00:00:00:00:25
+
+    - overlay_ip: 210.0.0.102
+      internal_ip: 172.17.0.26
+      mac: 00:00:00:00:00:26
+
+    - overlay_ip: 210.0.0.103
+      internal_ip: 172.17.0.27
+      mac: 00:00:00:00:00:27
+
+    - overlay_ip: 210.0.0.104
+      internal_ip: 172.17.0.28
+      mac: 00:00:00:00:00:28
+
+    - overlay_ip: 210.0.0.105
+      internal_ip: 172.17.0.29
+      mac: 00:00:00:00:00:29
+
+#    - overlay_ip: 210.0.0.106
+#      internal_ip: 172.17.0.30
+#      mac: 00:00:00:00:00:30
+
+#    - overlay_ip: 210.0.0.107
+#      internal_ip: 172.17.0.31
+#      mac: 00:00:00:00:00:31
+
+#    - overlay_ip: 210.0.0.108
+#      internal_ip: 172.17.0.32
+#      mac: 00:00:00:00:00:32
+
+#    - overlay_ip: 210.0.0.109
+#      internal_ip: 172.17.0.33
+#      mac: 00:00:00:00:00:33
+
+#    - overlay_ip: 210.0.0.110
+#      internal_ip: 172.17.0.34
+#      mac: 00:00:00:00:00:34
+
+#    - overlay_ip: 210.0.0.111
+#      internal_ip: 172.17.0.35
+#      mac: 00:00:00:00:00:35
+
+#    - overlay_ip: 210.0.0.112
+#      internal_ip: 172.17.0.36
+#      mac: 00:00:00:00:00:36
+
+#    - overlay_ip: 210.0.0.113
+#      internal_ip: 172.17.0.37
+#      mac: 00:00:00:00:00:37
 
   malicious:
-    - overlay_ip: 210.0.0.102
-      internal_ip: 10.138.0.9
-      mac: 32:8c:19:f5:9b:b0
+    - overlay_ip: 210.0.0.120
+      internal_ip: 172.17.0.50
+      mac: 00:00:00:00:00:50
+
+    - overlay_ip: 210.0.0.121
+      internal_ip: 172.17.0.51
+      mac: 00:00:00:00:00:51
+
+#    - overlay_ip: 210.0.0.122
+#      internal_ip: 172.17.0.52
+#      mac: 00:00:00:00:00:52
+
+#    - overlay_ip: 210.0.0.123
+#      internal_ip: 172.17.0.53
+#      mac: 00:00:00:00:00:53
+
+#    - overlay_ip: 210.0.0.124
+#      internal_ip: 172.17.0.54
+#      mac: 00:00:00:00:00:54
 
 alerts:
   - name: SYN attack

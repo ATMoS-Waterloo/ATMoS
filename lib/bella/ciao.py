@@ -67,7 +67,9 @@ class GemelEnv(gym.Env):
                  interval=10,
                  lose_on_void_action=False,
                  step_sleep=0,
-                 loss_penalty=LOSS_PENALTY):
+                 loss_penalty=LOSS_PENALTY,
+                 use_counts_by_time=False,
+                 agg_interval=1): # set higher for higher aggregation interval
 
         self.simulations = None
         self.ip_id_map = None
@@ -100,6 +102,11 @@ class GemelEnv(gym.Env):
             GemelEnv.ActionSpace.DOUBLE_BUTTON: Discrete(2 * len(self._hosts_sorted_by_id) + 1)
         }[self.actions]
 
+        # use counts by time representation instead of one-hot of last n alerts
+        self.use_counts_by_time = use_counts_by_time
+        # set aggregation interval for counts by time representation
+        self.agg_interval = agg_interval
+        
     @property
     def _interval(self):
         return self._interval_
@@ -125,11 +132,56 @@ class GemelEnv(gym.Env):
 
         return obs
 
+    def _fetch_alerts_agg(self):
+        """
+        Fetch count of IDS alerts grouped by second
+        """
+        # we want to fix length here based on max_alerts_per_host parameter
+        # (with a few seconds added just in case)
+        ids_alerts = ApiWrapper.get_events(interval=(self.max_alerts_per_host+2)*self.agg_interval)
+        
+        alerts = [(alert["src"], alert["timestamp"] // self.agg_interval, int(re.match(r".*:(\d+):.*", alert["sig_name"]).group(1)))
+                  for net, alerts in ids_alerts.items() for alert in alerts 
+                  if alert["timestamp"] > 0 and alert["timestamp"] // self.agg_interval <= self.max_alerts_per_host]
+
+        obs = {}
+        for src_ip, timestamp, alert_code in alerts:
+            agg = obs.get(src_ip, {})
+            alert_list = agg.get(timestamp, [0]*len(self.known_alerts))
+            for idx, i in enumerate(self.known_alerts):
+                if i['id'] == alert_code:
+                    alert_list[idx] += 1
+            agg[timestamp] = alert_list
+            obs[src_ip] = agg
+        return obs
+
+    def _get_ids_observations_agg(self):
+        """
+        Get IDS alerts and aggregate them by second and return as an n-dimensional array
+        """
+        ids_info = {self.ip_id_map[k]: v for k, v in self._fetch_alerts_agg().items() if k in self.ip_id_map}
+        
+        # add empty entries for absent hosts in the IDS alerts
+        empty_lists = {k: {} for k in self.ip_id_map.values() if k not in ids_info.keys()}
+        ids_info = {**ids_info, **empty_lists}
+        
+        for k, v in ids_info.items():
+            info = []
+            for i in range(self.max_alerts_per_host):
+                info.append(v.get(i+1, [0, 0]))
+            ids_info[k] = info
+
+        ids_info = [ids_info[k] for k in sorted(ids_info.keys())]
+        return np.asarray(ids_info)
+    
     def _get_ids_observations(self):
         """
         Get IDS alerts and convert to n-dimensional features array
         """
 
+        if self.use_counts_by_time:
+            return self._get_ids_observations_agg()
+        
         # get list of alerts per host
         ids_info = {self.ip_id_map[k]: v for k, v in self._fetch_alerts().items() if k in self.ip_id_map}
 

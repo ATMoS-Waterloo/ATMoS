@@ -26,6 +26,7 @@ def get_events(net, min_id=0, interval=None):
     c = db.cursor()
     c.execute("""
         SELECT 
+            (UNIX_TIMESTAMP() - UNIX_TIMESTAMP(timestamp)) as timestamp,
             e.cid, e.sid, sig_id, sig_name, 
             INET_NTOA(ip_src) as src, 
             INET_NTOA(ip_dst) as dst, 
