@@ -16,12 +16,6 @@ vnets:
     gateway-ip: 172.17.0.4
     gateway-mac: 00:00:00:00:00:02
 
-#  - name: vnet3
-#    security_level: 3
-#    gateway-ip: 172.17.0.5
-#    gateway-mac: 00:00:00:00:00:03
-
-
 simulations:
 
   benign:
@@ -103,3 +97,7 @@ alerts:
     id: 100
   - name: PING flood
     id: 101
+  - name: SQLi attack
+    id: 102
+  - name: Connection attack
+    id: 103

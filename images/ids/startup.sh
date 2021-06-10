@@ -6,7 +6,7 @@
 find /var/lib/mysql -type f -exec touch {} \; && service mysql start
 
 # run snort
-screen -d -m bash -c 'snort -c /etc/snort/snort.conf -i $(cat /etc/hostname)-eth0'
+screen -d -m bash -c 'snort -c /etc/snort/snort.conf -i $(cat /etc/hostname)-eth0 -k none'
 
 # run barnyard
 screen -d -S barnyard -m bash -c 'sudo barnyard2 -c /etc/snort/barnyard2.conf -d /var/log/snort -f snort.u2 -w /var/log/snort/barnyard2.waldo'

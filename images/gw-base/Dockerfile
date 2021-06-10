@@ -75,5 +75,6 @@ COPY etc/snort/rules/local.rules /etc/snort/rules/
 COPY queries.sh /root/
 RUN /root/queries.sh
 
-RUN apt install -y screen
+RUN apt install -y screen && \
+sed -i 's/output unified2: filename snort.u2, limit 128/output unified2: filename snort.u2, limit 1280000/g' /etc/snort/snort.conf
 

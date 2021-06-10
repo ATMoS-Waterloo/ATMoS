@@ -28,12 +28,24 @@ echo Build Googler
 cd $DIR/benign-googler
 ./build
 
+echo Build Webgoat
+cd $DIR/benign-wg
+./build
+
 echo Build SYN attacker
 cd $DIR/malish-syn
 ./build
 
 echo Build APT attacker
 cd $DIR/malish-apt
+./build
+
+echo Build metasploit
+cd $DIR/malish-metasploit
+./build
+
+echo Build sqli
+cd $DIR/malish-sqli
 ./build
 
 echo Build halsey

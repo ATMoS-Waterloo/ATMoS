@@ -4,8 +4,6 @@
 
 #. $DIR/config.sh
 
-apt-get install hping3
-
 if [ $# -lt 1 ]
 then
     echo "Usage: ./flooder.sh <dst ip>"

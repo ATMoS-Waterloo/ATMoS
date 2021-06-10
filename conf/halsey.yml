@@ -20,44 +20,84 @@ simulations:
 
   benign:
     - overlay_ip: 210.0.0.101
-      internal_ip: 172.17.0.5
-      mac: 00:00:00:00:00:03
+      internal_ip: 172.17.0.25
+      mac: 00:00:00:00:00:25
 
     - overlay_ip: 210.0.0.102
-      internal_ip: 172.17.0.6
-      mac: 00:00:00:00:00:04
+      internal_ip: 172.17.0.26
+      mac: 00:00:00:00:00:26
 
     - overlay_ip: 210.0.0.103
-      internal_ip: 172.17.0.7
-      mac: 00:00:00:00:00:05
+      internal_ip: 172.17.0.27
+      mac: 00:00:00:00:00:27
 
     - overlay_ip: 210.0.0.104
-      internal_ip: 172.17.0.8
-      mac: 00:00:00:00:00:06
+      internal_ip: 172.17.0.28
+      mac: 00:00:00:00:00:28
 
     - overlay_ip: 210.0.0.105
-      internal_ip: 172.17.0.9
-      mac: 00:00:00:00:00:07
+      internal_ip: 172.17.0.29
+      mac: 00:00:00:00:00:29
+
+#    - overlay_ip: 210.0.0.106
+#      internal_ip: 172.17.0.30
+#      mac: 00:00:00:00:00:30
+
+#    - overlay_ip: 210.0.0.107
+#      internal_ip: 172.17.0.31
+#      mac: 00:00:00:00:00:31
+
+#    - overlay_ip: 210.0.0.108
+#      internal_ip: 172.17.0.32
+#      mac: 00:00:00:00:00:32
+
+#    - overlay_ip: 210.0.0.109
+#      internal_ip: 172.17.0.33
+#      mac: 00:00:00:00:00:33
+
+#    - overlay_ip: 210.0.0.110
+#      internal_ip: 172.17.0.34
+#      mac: 00:00:00:00:00:34
+
+#    - overlay_ip: 210.0.0.111
+#      internal_ip: 172.17.0.35
+#      mac: 00:00:00:00:00:35
+
+#    - overlay_ip: 210.0.0.112
+#      internal_ip: 172.17.0.36
+#      mac: 00:00:00:00:00:36
+
+#    - overlay_ip: 210.0.0.113
+#      internal_ip: 172.17.0.37
+#      mac: 00:00:00:00:00:37
 
   malicious:
-    - overlay_ip: 210.0.0.110
-      internal_ip: 172.17.0.10
-      mac: 00:00:00:00:00:10
+    - overlay_ip: 210.0.0.120
+      internal_ip: 172.17.0.50
+      mac: 00:00:00:00:00:50
 
-    - overlay_ip: 210.0.0.111
-      internal_ip: 172.17.0.11
-      mac: 00:00:00:00:00:11
+    - overlay_ip: 210.0.0.121
+      internal_ip: 172.17.0.51
+      mac: 00:00:00:00:00:51
 
-    - overlay_ip: 210.0.0.112
-      internal_ip: 172.17.0.12
-      mac: 00:00:00:00:00:12
+#    - overlay_ip: 210.0.0.122
+#      internal_ip: 172.17.0.52
+#      mac: 00:00:00:00:00:52
 
-    - overlay_ip: 210.0.0.113
-      internal_ip: 172.17.0.13
-      mac: 00:00:00:00:00:13
+#    - overlay_ip: 210.0.0.123
+#      internal_ip: 172.17.0.53
+#      mac: 00:00:00:00:00:53
+
+#    - overlay_ip: 210.0.0.124
+#      internal_ip: 172.17.0.54
+#      mac: 00:00:00:00:00:54
 
 alerts:
   - name: SYN attack
     id: 100
   - name: PING flood
     id: 101
+  - name: SQLi attack
+    id: 102
+  - name: Connection attack
+    id: 103
