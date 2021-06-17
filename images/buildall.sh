@@ -28,8 +28,12 @@ echo Build Googler
 cd $DIR/benign-googler
 ./build
 
-echo Build Webgoat
+echo Build Juice Shop
 cd $DIR/benign-wg
+./build
+
+echo Build DVWA
+cd $DIR/benign-dvwa
 ./build
 
 echo Build SYN attacker
