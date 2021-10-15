@@ -1,6 +1,6 @@
-# ATMoS
+# ATMoS+
 
-ATMoS is a framework for applying [reinforcement learning](https://medium.com/machine-learning-for-humans/reinforcement-learning-6eacf258b265) to security management of [Software-defined Networks](https://medium.com/@blackvvine/sdn-part-1-what-is-software-defined-networking-sdn-and-why-should-i-know-about-it-e73a250ceccd).
+This branch maintains the code for ATMoS+, an extension of ATMoS. ATMoS is a framework for applying [reinforcement learning](https://medium.com/machine-learning-for-humans/reinforcement-learning-6eacf258b265) to security management of [Software-defined Networks](https://medium.com/@blackvvine/sdn-part-1-what-is-software-defined-networking-sdn-and-why-should-i-know-about-it-e73a250ceccd). ATMoS+ uses permutation-equivariant and permutation-invariant functions to build a more robust reinforcement learning agent that allows hosts to be reordered and can scale to larger or smaller networks.
 
 # Concepts
 
